@@ -13,7 +13,7 @@
     {% else %}
         Aucun article trouvé.
     {% endfor %}
-    <a href="{{ path('homepage') }}">
+    <a href="{{ path('app_index') }}">
         Back to homepage.
     </a>
 
@@ -21,7 +21,7 @@
         Testing show() method from BlogController with a real article s slug.
     </a>
     <br>
-    <a href="{{ path('blog_index') }}">
+    <a href="{{ path('index') }}">
         Testing index() method from BlogController to view all articles.
     </a>
 {% endblock %}
