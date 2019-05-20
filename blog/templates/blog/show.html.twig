@@ -13,6 +13,15 @@
         <p>{{ article.content }}</p>
     </div>
 
+    <h2>Tags :</h2>
+    <ul>
+        {% for tag in article.tags %}
+            <li><a href="{{ path('show_tag', { 'name': tag.name} )  }}">{{ tag.name}}</a></li>
+        {% else %}
+            <li>No tags for this article</li>
+        {% endfor %}
+    </ul>
+
     <a href="{{ path('app_index') }}">
         Back to homepage.
     </a>

@@ -1,13 +1,17 @@
 <?php
+
 namespace App\Controller;
+
 use App\Entity\Article;
 use App\Entity\Category;
+use App\Entity\Tag;
 use App\Form\ArticleSearchType;
-use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+
 class BlogController extends AbstractController
 {
     /**
@@ -75,5 +79,20 @@ class BlogController extends AbstractController
             [
                 'articles' => $category->getArticles(),
             ]);
+    }
+
+    /**
+     * Getting a category with a formatted slug for title
+     * @Route("blog/tag/{name}", name="show_tag")
+     * @ParamConverter("tag", class="App\Entity\Tag")
+     */
+    public function showByTag(Tag $tag): Response
+    {
+        return $this->render(
+            'blog/tag.html.twig',
+            [
+                'tag' => $tag
+            ]
+        );
     }
 }
