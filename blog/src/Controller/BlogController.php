@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
+
 class BlogController extends AbstractController
 {
     /**
@@ -36,19 +37,20 @@ class BlogController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
     /**
     @param string $slug The slugger
      *
-     * @Route("/blog/{slug<^[a-z0-9-]+$>}",
+     * @Route("/blog/{slug}",
      *     defaults={"slug" = null},
      *     name="blog_show")
      *  @return Response A response instance
      */
-    public function show(string $slug ="article sans titre"): Response
+    public function show(?string $slug): Response
     {
         if (!$slug)
         {
-            throw $this->createNotFoundException('No slug has been sent to find an article in article\'s table .');
+            throw $this->createNotFoundException('No slug has been sent to find an article in article\'s table.');
         }
         $slug = preg_replace(
             '/-/',
@@ -59,11 +61,9 @@ class BlogController extends AbstractController
             ->findOneBy(['title'=> mb_strtolower($slug)]);
         if (!$article)
         {
-            throw $this->createNotFoundException(
-                'No article with '.$slug.' title found in article\'s table.'
-            );
+            throw $this->createNotFoundException('No article with '.$slug.' title found in article\'s table.');
         }
-        return $this->render('blog/blog.html.twig',
+        return $this->render('blog/show.html.twig',
             [
                 'title' => ucwords(str_replace('-',' ', $slug)),
                 'article' => $article,
