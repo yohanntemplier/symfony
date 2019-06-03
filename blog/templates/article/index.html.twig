@@ -24,7 +24,9 @@
                 <td>{{ article.slug }}</td>
                 <td>
                     <a href="{{ path('article_show', {'id': article.id}) }}">show</a>
-                    <a href="{{ path('article_edit', {'id': article.id}) }}">edit</a>
+                    {% if is_granted('ROLE_AUTHOR') %}
+                        <a href="{{ path('article_edit', { 'id': article.id} ) }}">Éditer</a>
+                    {%endif%}
                 </td>
             </tr>
         {% else %}
