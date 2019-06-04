@@ -1,4 +1,17 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
+ {{ form_widget(form) }}
+<div class="row">
+    {{ form_widget(form.title) }}
+    <div class="alert alert-danger alert-dismissible fade show p-1 my-1" role="alert">
+        {{ form_errors(form.title) }}
+    </div>
+</div>
+
+<div class="row">
+    {{ form_widget(form.content) }}
+    <div class="alert alert-danger alert-dismissible fade show p-1 my-1" role="alert">
+        {{ form_errors(form.content) }}
+    </div>
+</div>
     <button class="btn">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}

@@ -4,9 +4,15 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use App\Service\Slugify;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
+ * @UniqueEntity(
+ *     fields={"title"},
+ *     errorPath="title",
+ *     message="Ce titre existe déjà !")
  * @ORM\Entity(repositoryClass="App\Repository\ArticleRepository")
  */
 class Article
@@ -18,11 +24,18 @@ class Article
      */
     private $id;
     /**
+     * @Assert\NotBlank(message="Ce champ est obligatoire!")
+     * @Assert\Length(max="255",maxMessage="La catégorie saisie {{ value }} est trop longue, {{ limit }} caractères maximum")
      * @ORM\Column(type="string", length=255)
      */
     private $title;
     /**
-     * @ORM\Column(type="text")
+     *  @Assert\NotBlank(message="Ce champ est obligatoire!")
+     * @Assert\Regex(
+     *     pattern="/(?i)digital/",
+     *     match=false,
+     *     message="en français, il faut dire numérique")
+     * @ORM\Column(type="text", length=255)
      */
     private $content;
     /**
