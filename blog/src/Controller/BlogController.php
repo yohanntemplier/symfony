@@ -16,7 +16,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 class BlogController extends AbstractController
 {
     /**
-     * @Route("/index", name="blog_index")
+     * @Route("/blog", name="blog_index")
      */
     public function index()
     {
@@ -41,7 +41,7 @@ class BlogController extends AbstractController
     /**
     @param string $slug The slugger
      *
-     * @Route("/blog/{slug}",
+     * @Route("/blog/show/{slug}",
      *     defaults={"slug" = null},
      *     name="blog_show")
      *  @return Response A response instance
