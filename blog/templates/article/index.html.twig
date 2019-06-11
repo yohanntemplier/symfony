@@ -23,10 +23,11 @@
                 <td>{{ article.title }}</td>
                 <td>{{ article.content }}</td>
                 <td>{{ article.slug }}</td>
-                <td>{% for tag in article.tags %}
-                        <a href="{{ path('tag_show', {'name': tag.name}) }}">{{ tag.name }}</a>
-                    {% endfor %}
-                </td>
+                {% for tag in article.tags %}
+                    <td><a href="{{ path('tag_show', {'name': tag.name}) }}">{{ tag.name }}</a></td>
+                {% else %}
+                    <td>aucun tag pour l'article</td>
+                {% endfor %}
                 <td>
                     <a href="{{ path('article_show', {'id': article.id}) }}">show</a>
                     {% if is_granted('ROLE_AUTHOR') %}
