@@ -13,6 +13,14 @@
     <header>
         {% include 'navbar.html.twig' %}
     </header>
+    {% for category, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="alert alert-{{ category }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+
     {% if app.user %}
         Bonjour {{ app.user.email }} !
         <a href="{{ path('app_logout') }}"> Se déconnecter</a>

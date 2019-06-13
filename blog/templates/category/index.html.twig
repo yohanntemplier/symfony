@@ -1,12 +1,31 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Form{% endblock %}
-
-{% block stylesheets %}{% endblock %}
+{% block title %}Category index{% endblock %}
 
 {% block body %}
-    {{ form_start(form) }}
-    {{ form_row(form) }}
-    <input type="submit" value="send"/>
-    {{ form_end(form) }}
+    <h1>Category index</h1>
+
+    <a href="{{ path('category_new') }}">ajouter categorie</a>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for category in categories %}
+            <tr>
+                <td>{{ category.id }}</td>
+                <td>{{ category.name }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">aucun enregistrement</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
 {% endblock %}

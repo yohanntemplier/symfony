@@ -12,13 +12,13 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  * @method Category[]    findAll()
  * @method Category[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
+
 class CategoryRepository extends ServiceEntityRepository
 {
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Category::class);
     }
-
     // /**
     //  * @return Category[] Returns an array of Category objects
     //  */
@@ -35,7 +35,6 @@ class CategoryRepository extends ServiceEntityRepository
         ;
     }
     */
-
     /*
     public function findOneBySomeField($value): ?Category
     {
