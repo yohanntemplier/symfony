@@ -62,62 +62,8 @@ class CategoryController extends AbstractController
     }
 }
 
-/*namespace App\Controller;
 
-use App\Entity\Category;
-use App\Form\CategoryType;
-use App\Repository\CategoryRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-
-
-class CategoryController extends AbstractController
-{
-    /**
-     * @Route("/category", name="category")
-     * @IsGranted("ROLE_ADMIN")
-     */
-
-    /*public function index(CategoryRepository $categoryRepository): Response
-    {
-        return $this->render('category/index.html.twig', [
-            'categories' => $categoryRepository->findAll(),
-        ]);
-    }
-
-    /**
-     * @Route("/new", name="category_new", methods={"GET","POST"})
-     * @param Request $request
-     * @return Response A response
-     */
-    /*public function new(Request $request): Response
-    {
-        $category = new Category();
-        $categories = $this->getDoctrine()
-            ->getRepository(Category::class)
-            ->findAll();
-        $form = $this->createForm(CategoryType::class, $category);
-        $form->handleRequest($request);
-        if ($form->isSubmitted()) {
-            $data= $form->getData();
-            $categoryManager = $this->getDoctrine()->getManager();
-            $categoryManager->persist($data);
-            $categoryManager->flush();
-            return $this->redirectToRoute('category');
-        }
-        $this->render('category/index.html.twig', [
-            'form' => $form->createView(),
-            'categories' => $categories,
-        ]);
-        return $this->render('category/index.html.twig', [
-            'category' => $category,
-            'form' => $form->createView(),
-        ]);
-    }
-
+/*
     /**
      * @Route("/{id}", name="category_show", methods={"GET"})
      */
