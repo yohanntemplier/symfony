@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Service\Slugify;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Doctrine\Common\Persistence\ObjectManager;
 
 /**
  * @Route("/article")
@@ -77,6 +78,7 @@ class ArticleController extends AbstractController
         return $this->render('article/show.html.twig', [
             'article' => $article,
             'slug'=> $slug,
+            'isFavorite' => $this->getUser()->isFavorite($article)
         ]);
     }
 
@@ -130,5 +132,24 @@ class ArticleController extends AbstractController
         $this->addFlash('danger', 'Article supprimé.');
 
         return $this->redirectToRoute('article_index');
+    }
+
+    /**
+     * @Route("/{id}/favorite", name="article_favorite", methods={"GET","POST"})
+     */
+    public function favorite(Request $request, Article $article, ObjectManager $manager): Response
+    {
+        if ($this->getUser()->getFavorites()->contains($article)) {
+            $this->getUser()->removeFavorite($article)   ;
+        }
+        else {
+            $this->getUser()->addFavorite($article);
+        }
+
+        $manager->flush();
+
+        return $this->json([
+            'isFavorite' => $this->getUser()->isFavorite($article)
+        ]);
     }
 }
